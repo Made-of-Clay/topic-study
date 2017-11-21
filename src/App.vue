@@ -1,31 +1,33 @@
 <template>
     <div id="app-wrapper">
-        <app-header></app-header>
-
+        <!-- <app-header></app-header> -->
+        <md-button class="md-accent">Accent</md-button>
         <div class="content-wrapper">
-            <app-drawer></app-drawer>
-            <app-content></app-content>
+            <!-- <app-drawer></app-drawer>
+            <app-content></app-content> -->
         </div>
     </div>
 </template>
 
 <script>
-import AppHeader from './components/app-header';
-import AppDrawer from './components/app-drawer';
-import AppContent from './components/app-content';
+// import AppHeader from './components/app-header';
+// import AppDrawer from './components/app-drawer';
+// import AppContent from './components/app-content';
 
 export default {
     name: 'app',
 
-    components: { AppHeader, AppDrawer, AppContent },
+    // components: { AppHeader, AppDrawer, AppContent },
 
     data() {
         return {
-            msg: 'Welcome to Your Vue.js App'
+            msg: 'Welcome to Your Vue.js App',
         };
     },
 
-
+    created() {
+        // this.
+    },
 }
 </script>
 

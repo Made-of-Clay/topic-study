@@ -42,6 +42,7 @@ module.exports = {
     resolve: {
         alias: {
             'vue$': 'vue/dist/vue.esm.js',
+            'vue-material$': 'vue-material/dist/vue-material.min.js',
             'axios$': 'axios/dist/axios.min.js'
         },
         extensions: ['*', '.js', '.vue', '.json']
