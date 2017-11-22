@@ -1,8 +1,17 @@
 <template>
     <div id="app-wrapper">
-        <!-- <app-header></app-header> -->
-        <md-button class="md-accent">Accent</md-button>
+        <md-toolbar class="app-header">
+            <md-button class="md-icon-button app-header__toggle"
+                @click="toggleDrawer">
+                <md-icon>menu</md-icon>
+            </md-button>
+
+            <h1 v-html="pageTitle" class="md-title app-header__title"></h1>
+        </md-toolbar>
+
         <div class="content-wrapper">
+            <topic-list></topic-list>
+            <selected-topic></selected-topic>
             <!-- <app-drawer></app-drawer>
             <app-content></app-content> -->
         </div>
@@ -10,23 +19,34 @@
 </template>
 
 <script>
-// import AppHeader from './components/app-header';
-// import AppDrawer from './components/app-drawer';
-// import AppContent from './components/app-content';
+import TopicList from './components/topic-list';
+import SelectedTopic from './components/selected-topic';
+
+const siteTitle = 'Topic Study';
 
 export default {
     name: 'app',
 
-    // components: { AppHeader, AppDrawer, AppContent },
+    components: { TopicList, SelectedTopic },
 
     data() {
         return {
-            msg: 'Welcome to Your Vue.js App',
         };
+    },
+    computed: {
+        pageTitle() {
+            let curTopicName = this.$store.state.currentTopicName;
+            return curTopicName ? `${siteTitle}: ${curTopicName}` : siteTitle;
+        }
     },
 
     created() {
-        // this.
+    },
+
+    methods: {
+        toggleDrawer() {
+            console.log('toggle');
+        },
     },
 }
 </script>
@@ -44,18 +64,23 @@ export default {
 h1, h2 {
     font-weight: normal;
 }
-
 ul {
     list-style-type: none;
     padding: 0;
 }
-
 li {
     display: inline-block;
     margin: 0 10px;
 }
-
 a {
     color: #42b983;
+}
+
+.app-header {
+    background-color: purple;
+    color: white;
+}
+.app-header__toggle {
+    color: white;
 }
 </style>
