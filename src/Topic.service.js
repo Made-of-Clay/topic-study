@@ -19,7 +19,7 @@ export default class TopicService {
         return request;
     }
 
-    getTopicsItems(id) {
+    getTopicItems(id) {
         if (this.lastRequest) {
             const cancelMsg = 'The previous request was not finished; cancelling previous request';
             this.lastRequest.cancel(cancelMsg);
