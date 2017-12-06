@@ -9,11 +9,9 @@
             <h1 v-html="pageTitle" class="md-title app-header__title"></h1>
         </md-toolbar>
 
-        <div class="content-wrapper">
+        <div class="content-wrapper l-body">
             <topic-list></topic-list>
             <selected-topic></selected-topic>
-            <!-- <app-drawer></app-drawer>
-            <app-content></app-content> -->
         </div>
     </div>
 </template>
@@ -52,13 +50,11 @@ export default {
 </script>
 
 <style>
-#app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
+body {
+    display: flex;
+}
+#app-wrapper {
+    width: 100%;
 }
 
 h1, h2 {
@@ -82,5 +78,13 @@ a {
 }
 .app-header__toggle {
     color: white;
+}
+
+.l-body {
+    display: flex;
+}
+.l-drawer {
+    flex: 0 0 300px;
+    width: 300px;
 }
 </style>
