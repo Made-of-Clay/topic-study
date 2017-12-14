@@ -1,11 +1,20 @@
 <template>
-    <div class="selected-topic">
+    <div id="selected-topic-container" class="selected-topic">
+        <div id="progress-spacer">
+        <transition name="fade">
+            <md-progress-bar v-show="loading" md-mode="query"></md-progress-bar>
+        </transition>
+        </div>
+
+        <transition-group name="fadeDown">
         <div v-for="item in items"
+            :key="item.id"
             :id="`topic-${item.id}`"
             class="selected-item">
             <div v-html="item.content" class="selected-item__content"></div>
             <div v-html="item.source" class="selected-item__source"></div>
         </div>
+        </transition-group>
     </div>
 </template>
 
@@ -58,10 +67,10 @@ export default {
     flex: 1;
     margin: 2em 1em 0;
 }
+
 .selected-item {
-    background-color: rgba(0,0,0,0.1);
+    background-color: white;
     border-bottom: 1px solid rgba(0,0,0,0.25);
-    border-top: 1px solid #fafafa;
     margin: 0 auto;
     max-width: 900px;
     padding: 0.75em;
@@ -80,7 +89,7 @@ export default {
 .selected-item__content::before {
     content: '\201c';
     left: 0;
-    top: 5%;
+    top: 0.1em;
 }
 .selected-item__content::after {
     content: '\201d';
@@ -95,5 +104,33 @@ export default {
     content: '-';
     display: inline-block;
     margin-right: 0.5em;
+}
+
+#progress-spacer {
+    height: 10px;
+}
+.md-progress-bar.md-query .md-progress-bar-track,
+.md-progress-bar.md-query .md-progress-bar-fill,
+.md-progress-bar.md-query .md-progress-bar-buffer {
+    background-color: hsla(280, 100%, 31%, 0.5);
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.3s;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+.fadeDown-enter-active, .fadeDown-leave-active {
+    transition: opacity 0.3s, transform 0.3s;
+}
+.fadeDown-enter, .fadeDown-leave-to {
+    opacity: 0;
+}
+.fadeDown-enter {
+    transform: translateY(100px);
+}
+.fadeDown-leave-to {
+    transform: translateY(-100px);
 }
 </style>

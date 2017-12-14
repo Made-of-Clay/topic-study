@@ -81,6 +81,9 @@ function inArray(needle, haystack) {
     margin-left: 2em;
     width: auto;
 }
+.topic-item {
+    transition: background-color 0.3s;
+}
 .topic-item.is-selected {
     background-color: #fdfd4a;
 }

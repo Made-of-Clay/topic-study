@@ -51,6 +51,7 @@ export default {
 
 <style>
 body {
+    background-color: #f0f0f0;
     display: flex;
 }
 #app-wrapper {
@@ -73,7 +74,7 @@ a {
 }
 
 .app-header {
-    background-color: purple;
+    background-color: #67009c;
     color: white;
 }
 .app-header__toggle {
