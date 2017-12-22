@@ -15,9 +15,12 @@
             <selected-topic></selected-topic>
         </div>
 
-        <div class="l-overlay"
-            :class="{'is-showing':overlayShowing}"
-            @click="hideOverlay"></div>
+        <transition name="fadeIn">
+                <!-- :class="{'is-showing':overlayShowing}" -->
+            <div v-show="overlayShowing"
+                class="l-overlay"
+                @click="hideOverlay"></div>
+        </transition>
     </div>
 </template>
 
@@ -107,15 +110,15 @@ a {
     background-color: rgba(0,0,0,0.5);
     height: 100%;
     left: 0;
-    opacity: 0;
+    /*opacity: 0;*/
     position: fixed;
     transition: opacity 0.3s;
     top: 0;
     width: 100%;
 }
-.l-overlay.is-showing {
+/*.l-overlay.is-showing {
     opacity: 1;
-}
+}*/
 
 .app-header {
     background-color: #67009c;
@@ -149,5 +152,18 @@ a {
 }
 .l-drawer--floating.is-showing {
     transform: translateX(300px);
+}
+
+.fadeIn-enter-active, .fadeIn-leave-active {
+    transition: opacity 0.3s;
+}
+.fadeIn-enter, .fadeIn-leave-to {
+    opacity: 0;
+}
+.fadeIn-enter {
+    transform: translateX(100%);
+}
+.fadeIn-leave-to {
+    transform: translateY(-100%);
 }
 </style>

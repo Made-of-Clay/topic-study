@@ -71,9 +71,19 @@ export default {
 .selected-item {
     background-color: white;
     border-bottom: 1px solid rgba(0,0,0,0.25);
+    border-radius: 3px;
     margin: 0 auto;
     max-width: 900px;
     padding: 0.75em;
+}
+.selected-item:first-child {
+    border-radius: 4px 4px 0 0;
+}
+.selected-item:last-child {
+    border-radius: 0 0 4px 4px;
+}
+.selected-item:first-child:last-child {
+    border-radius: 4px;
 }
 .selected-item__content {
     display: block;
