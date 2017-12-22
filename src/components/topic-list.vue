@@ -1,5 +1,5 @@
 <template>
-    <aside class="topic-list l-drawer">
+    <aside class="topic-list">
         <md-field class="topic-list__filter">
             <label>Filter Topics</label>
             <md-input v-model="searchTerm"></md-input>
@@ -77,7 +77,9 @@ function inArray(needle, haystack) {
 
 <style>
 .topic-list {
-
+    background-color: #f0f0f1;
+    height: 100%;
+    z-index: 10;
 }
 .topic-list__filter {
     border-bottom: 1px solid rgba(0,0,0,0.15);

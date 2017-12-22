@@ -2,6 +2,7 @@
     <div id="app-wrapper">
         <md-toolbar class="app-header">
             <md-button class="md-icon-button app-header__toggle"
+                :class="{'is-disabled':stickyDrawer}"
                 @click="toggleDrawer">
                 <md-icon>menu</md-icon>
             </md-button>
@@ -9,10 +10,14 @@
             <h1 v-html="pageTitle" class="md-title app-header__title"></h1>
         </md-toolbar>
 
-        <div class="content-wrapper l-body">
-            <topic-list></topic-list>
+        <div class="content-wrapper l-body" :class="{'l-sticky-drawer':stickyDrawer}">
+            <topic-list class="l-drawer" :class="dynamicDrawerClasses"></topic-list>
             <selected-topic></selected-topic>
         </div>
+
+        <div class="l-overlay"
+            :class="{'is-showing':overlayShowing}"
+            @click="hideOverlay"></div>
     </div>
 </template>
 
@@ -29,21 +34,42 @@ export default {
 
     data() {
         return {
+            stickyDrawer: true,
+            drawerShowing: false,
         };
     },
     computed: {
         pageTitle() {
             let curTopicName = this.$store.state.currentTopicName;
             return curTopicName ? `${siteTitle}: ${curTopicName}` : siteTitle;
-        }
+        },
+        dynamicDrawerClasses() {
+            return {
+                'l-drawer--floating': !this.stickyDrawer,
+                'is-showing': this.drawerShowing,
+            };
+        },
+        overlayShowing() {
+            return !this.stickyDrawer && this.drawerShowing;
+        },
     },
 
     created() {
+        window.addEventListener('resize', () => this.checkStickyDrawer());
+    },
+    mounted() {
+        this.checkStickyDrawer();
     },
 
     methods: {
         toggleDrawer() {
-            console.log('toggle');
+            this.drawerShowing = !this.drawerShowing;   
+        },
+        checkStickyDrawer() {
+            this.stickyDrawer = window.innerWidth > 800;
+        },
+        hideOverlay() {
+            this.drawerShowing = false;
         },
     },
 }
@@ -55,6 +81,8 @@ body {
     display: flex;
 }
 #app-wrapper {
+    display: flex;
+    flex-direction: column;
     width: 100%;
 }
 
@@ -73,6 +101,20 @@ a {
     color: #42b983;
 }
 
+.l-overlay {
+    background-color: rgba(0,0,0,0.5);
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: fixed;
+    transition: opacity 0.3s;
+    top: 0;
+    width: 100%;
+}
+.l-overlay.is-showing {
+    opacity: 1;
+}
+
 .app-header {
     background-color: #67009c;
     color: white;
@@ -80,12 +122,30 @@ a {
 .app-header__toggle {
     color: white;
 }
+.app-header__toggle.is-disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
 
 .l-body {
+    flex: 1;
+    padding-top: 2em;
+    position: relative;
+}
+.l-body.l-sticky-drawer {
     display: flex;
 }
 .l-drawer {
     flex: 0 0 300px;
+    transition: transform 0.3s;
     width: 300px;
+}
+.l-drawer--floating {
+    left: -300px;
+    position: absolute;
+    top: 0;
+}
+.l-drawer--floating.is-showing {
+    transform: translateX(300px);
 }
 </style>

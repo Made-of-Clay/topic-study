@@ -65,7 +65,7 @@ export default {
 <style>
 .selected-topic {
     flex: 1;
-    margin: 2em 1em 0;
+    margin: 0 1em;
 }
 
 .selected-item {
