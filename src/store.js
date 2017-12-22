@@ -1,9 +1,17 @@
 "use strict";
 
+const siteTitle = 'Topic Study';
+
 export default {
     state: {
         currentTopicID: '',
         currentTopicName: '',
+    },
+    getters: {
+        pageTitle(state) {
+            let curTopicName = state.currentTopicName;
+            return curTopicName ? `${siteTitle}: ${curTopicName}` : siteTitle;
+        },
     },
     actions: {
         setCurrentTopic({commit}, currentTopic) {

@@ -40,8 +40,7 @@ export default {
     },
     computed: {
         pageTitle() {
-            let curTopicName = this.$store.state.currentTopicName;
-            return curTopicName ? `${siteTitle}: ${curTopicName}` : siteTitle;
+            return this.$store.getters.pageTitle;
         },
         dynamicDrawerClasses() {
             return {
@@ -52,6 +51,9 @@ export default {
         overlayShowing() {
             return !this.stickyDrawer && this.drawerShowing;
         },
+    },
+    watch: {
+        pageTitle: title => document.title = title,
     },
 
     created() {
