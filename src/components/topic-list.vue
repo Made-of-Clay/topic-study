@@ -5,7 +5,8 @@
             <md-input v-model="searchTerm"></md-input>
         </md-field>
 
-        <md-list>
+        <!-- <transition-group name="slideInLeft"> -->
+        <md-list key="foo">
             <md-list-item v-for="(topic, i) in topics"
                 v-if="topics.length"
                 :key="`item-${topic.id}`"
@@ -15,6 +16,7 @@
                 {{topic.name}} ({{topic.count}})
             </md-list-item>
         </md-list>
+        <!-- </transition-group> -->
     </aside>
 </template>
 
@@ -78,10 +80,16 @@ function inArray(needle, haystack) {
 
 }
 .topic-list__filter {
+    border-bottom: 1px solid rgba(0,0,0,0.15);
     margin-left: 2em;
+    transition: border-color 0.3s;
     width: auto;
 }
+.topic-list__filter.md-focused {
+    border-color: #67009c;
+}
 .topic-item {
+    border-radius: 3px;
     transition: background-color 0.3s;
 }
 .topic-item.is-selected {
@@ -90,4 +98,17 @@ function inArray(needle, haystack) {
 .topic-item:hover {
     background-color: rgba(0,0,0,0.1);
 }
+
+/*.slideInLeft-enter-active, .slideInLeft-leave-active {
+    transition: opacity 0.3s, transform 0.3s;
+}
+.slideInLeft-enter, .slideInLeft-leave-to {
+    opacity: 0;
+}
+.slideInLeft-enter {
+    transform: translateX(100%);
+}
+.slideInLeft-leave-to {
+    transform: translateY(-100%);
+}*/
 </style>
